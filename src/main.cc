@@ -31,6 +31,10 @@ int main(void)
         // Stores the event (keyboards...)
         sf::Event event;
 
+        window.clear();
+        window.draw(background);
+        window.display();
+
         //pollEvent renvoie true si un event est en attente, false sinon
         while (window.pollEvent(event))
         {
