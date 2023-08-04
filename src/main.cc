@@ -13,18 +13,15 @@
 #include <memory>
 #include <thread>
 
+#include "board.hh"
+
 int main(void)
 {
     // Main window of the prg
-    sf::RenderWindow window(sf::VideoMode(1920, 1080, sf::Style::Default),
-            "Sokoban");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080, sf::Style::Default), "Sokoban");
     window.setVerticalSyncEnabled(true);
 
-    // Creating the background for the menu
-    sf::Texture background_t;
-    background_t.create(1920, 1080);
-    sf::Sprite background(background_t); 
-    background.setColor(sf::Color(255, 0, 0));
+    Board board(10, 10);
 
     while (window.isOpen())
     {
@@ -32,14 +29,14 @@ int main(void)
         sf::Event event;
 
         window.clear();
-        window.draw(background);
+
+        board.draw(window, sf::RenderStates::Default);
+
         window.display();
 
-        //pollEvent renvoie true si un event est en attente, false sinon
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed 
-                    || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tab))
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 window.close();
         }
     }
