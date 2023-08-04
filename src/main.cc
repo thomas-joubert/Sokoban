@@ -21,7 +21,7 @@ int main(void)
     sf::RenderWindow window(sf::VideoMode(1920, 1080, sf::Style::Default), "Sokoban");
     window.setVerticalSyncEnabled(true);
 
-    Board board(10, 10);
+    Board board = Board::loadFromFile("assets/boards/board1.json");
 
     while (window.isOpen())
     {
