@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Game Board",
+    "description": "A game board",
+    "type": "object",
+    "properties" : {
+        "width" : {
+            "description" : "The width of the board",
+            "type" : "integer",
+            "minimum" : 3
+        },
+        "height": {
+            "description" : "The height of the board",
+            "type" : "integer",
+            "minimum" : 3
+        },
+        "rows" : {
+            "description" : "The rows of the board",
+            "type" : "array",
+            "items" : {
+                "type" : "array",
+                "items" : {
+                    "type" : "integer",
+                    "enum" : [0, 1, 2, 3, 4, 5]
+                }
+            }
+        }
+    }   
+}
