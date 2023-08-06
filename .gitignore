@@ -33,5 +33,7 @@
 bin
 
 # Meson build folder
-
 build*
+
+# Vs code files
+.vscode
