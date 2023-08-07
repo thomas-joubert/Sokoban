@@ -10,10 +10,27 @@
 
 #include <iostream>
 #include <vector>
-#include <memory>
-#include <thread>
+#include <fstream>
 
 #include "board.hh"
+#include "board_validator.hh"
+
+Board createBoardFromJson(std::string rawBoard, std::string rawSchema)
+{
+    std::ifstream jsonBoard(rawBoard);
+    nlohmann::json board = nlohmann::json::parse(jsonBoard);
+
+    std::ifstream jsonSchema(rawSchema);
+    nlohmann::json schema = nlohmann::json::parse(jsonSchema);
+
+    if (!BoardValidator::isValid(board, schema))
+    {
+        std::cerr << "Invalid board" << std::endl;
+        exit(84);
+    }
+
+    return Board::loadFromFile(board);
+}
 
 int main(void)
 {
@@ -21,7 +38,7 @@ int main(void)
     sf::RenderWindow window(sf::VideoMode(1920, 1080, sf::Style::Default), "Sokoban");
     window.setVerticalSyncEnabled(true);
 
-    Board board = Board::loadFromFile("assets/boards/board1.json");
+    Board board = createBoardFromJson("assets/boards/board1.json", "resources/board.schema.json");
 
     while (window.isOpen())
     {
