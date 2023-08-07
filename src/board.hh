@@ -10,6 +10,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <iostream>
 
 #define WALL 0
 #define EMPTY 1
@@ -37,7 +38,7 @@ class Board : public sf::Drawable
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
         // Loads a board from a json file
-        static Board loadFromFile(std::string path);
+        static Board loadFromFile(nlohmann::json rawBoard);
 
     private:
 

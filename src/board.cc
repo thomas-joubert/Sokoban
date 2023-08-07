@@ -62,10 +62,7 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 // Loads a Board object from a json file
-Board Board::loadFromFile(std::string path)
+Board Board::loadFromFile(nlohmann::json rawBoard)
 {
-    std::ifstream file(path);
-    nlohmann::json rawBoard = nlohmann::json::parse(file);
-
-    return Board(rawBoard["height"], rawBoard["width"], rawBoard["rows"]);
+    return Board(rawBoard["height"], rawBoard["width"], rawBoard["rows"].get<std::vector<std::vector<short>>>());
 }
